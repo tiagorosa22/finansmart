@@ -1,0 +1,351 @@
+Prompt para criar um app finaceiro pessoal pelo Lovable - Vibe coding
+
+
+Crie uma aplicação web chamada FinanSmart, um sistema moderno de controle financeiro pessoal.
+
+OBJETIVO
+O FinanSmart deve permitir que o usuário controle suas receitas e despesas, visualize seu saldo e acompanhe seus gastos por categoria.
+
+IMPORTANTE
+Não implemente funcionalidades de IA nesta primeira versão.
+Não implemente login nesta primeira versão.
+Priorize uma aplicação funcional, limpa, responsiva e fácil de evoluir posteriormente.
+
+TELAS
+
+1. DASHBOARD
+
+Criar uma página inicial contendo:
+
+- Saldo atual
+- Total de receitas do mês
+- Total de despesas do mês
+- Resultado financeiro do mês
+- Gráfico de receitas x despesas
+- Gráfico de despesas por categoria
+- Lista das últimas transações
+
+Utilizar cards visuais para os principais indicadores.
+
+2. LANÇAMENTOS
+
+Criar uma página para visualizar todos os lançamentos.
+
+Cada lançamento deve apresentar:
+
+- Data
+- Descrição
+- Tipo: Receita ou Despesa
+- Categoria
+- Forma de pagamento
+- Valor
+- Status
+
+Adicionar filtros por:
+
+- Período
+- Tipo
+- Categoria
+- Status
+
+Adicionar botões para:
+
+- Novo lançamento
+- Editar
+- Excluir
+
+3. NOVO LANÇAMENTO
+
+Criar formulário contendo:
+
+- Tipo: Receita ou Despesa
+- Descrição
+- Valor
+- Data
+- Categoria
+- Forma de pagamento
+- Status
+- Observação
+
+O formulário deve validar os campos obrigatórios.
+
+CATEGORIAS INICIAIS
+
+Despesas:
+
+- Alimentação
+- Moradia
+- Transporte
+- Saúde
+- Educação
+- Lazer
+- Assinaturas
+- Compras
+- Contas
+- Outros
+
+Receitas:
+
+- Salário
+- Freelance
+- Investimentos
+- Outros
+
+FORMAS DE PAGAMENTO
+
+- Dinheiro
+- PIX
+- Débito
+- Crédito
+- Transferência
+- Boleto
+
+STATUS
+
+- Pago
+- Pendente
+
+REGRAS FINANCEIRAS
+
+Receitas devem aumentar o saldo.
+
+Despesas pagas devem diminuir o saldo.
+
+Despesas pendentes não devem ser descontadas do saldo atual, mas devem aparecer no total de despesas pendentes.
+
+O dashboard deve atualizar automaticamente após criar, editar ou excluir uma transação.
+
+DESIGN
+
+Criar uma interface:
+
+- Moderna
+- Profissional
+- Minimalista
+- Responsiva
+- Fácil de usar
+- Compatível com desktop e celular
+
+Criar uma barra lateral de navegação contendo:
+
+- Dashboard
+- Lançamentos
+- Relatórios
+- Configurações
+
+Utilizar uma identidade visual relacionada a finanças, transmitindo organização, confiança e tecnologia.
+
+TECNOLOGIA
+
+Utilizar uma arquitetura moderna e organizada.
+
+Separar:
+
+- componentes
+- páginas
+- serviços
+- modelos
+- dados
+- estilos
+
+O código deve ser organizado para permitir posteriormente:
+
+- autenticação de usuários
+- banco de dados
+- cartões de crédito
+- contas bancárias
+- metas financeiras
+- orçamento mensal
+- inteligência artificial
+
+DADOS
+
+Nesta primeira versão, utilizar dados locais/mock ou armazenamento local do navegador para permitir que o aplicativo funcione imediatamente.
+
+Não criar informações financeiras fictícias permanentes. Caso seja necessário utilizar dados de demonstração, deixar claramente identificado como dados de exemplo.
+
+QUALIDADE
+
+- Código limpo
+- Componentes reutilizáveis
+- Responsividade
+- Boa experiência do usuário
+- Tratamento de erros
+- Validação dos formulários
+- Interface em português do Brasil
+- Valores monetários no formato brasileiro (R$)
+- Datas no formato brasileiro
+
+IMPORTANTE
+
+Antes de implementar funcionalidades adicionais, deixe o MVP descrito acima funcionando completamente.
+
+Ao finalizar, apresente:
+
+1. Estrutura do projeto
+2. Tecnologias utilizadas
+3. Funcionalidades implementadas
+4. Como executar o projeto
+5. Próximas funcionalidades recomendadas
+
+---------------------------------------------------------------
+
+1. Estrutura do Projeto (Obs.: MVP concluido)
+
+Ajuste final aplicado nos cards de valor. Aplicativo verificado no navegador, sem erros de console.
+
+src/
+  models/finance.ts          tipos, categorias, formas de pagamento, status
+  data/demoTransactions.ts   dados de EXEMPLO (opcionais, marcados)
+  services/
+    transactionStorage.ts    persistência em localStorage
+    financeCalculations.ts   saldo, resumos, séries e categorias
+  store/TransactionsProvider  estado global + CRUD reativo
+  components/
+    layout/AppLayout          sidebar responsiva + cabeçalho
+    finance/                  StatCard, TransactionForm, TransactionDialog, TransactionsTable
+    ui/                       shadcn
+  routes/                     / (Dashboard), /lancamentos, /relatorios, /configuracoes
+  lib/format.ts               R$ e datas pt-BR
+  styles.css                  design system (tokens oklch)
+
+
+2. Tecnologias: React 19 + TanStack Start/Router, TypeScript, Tailwind v4 (tokens semânticos), shadcn/ui, Recharts, Zod, Sonner, localStorage.
+
+3. Funcionalidades: dashboard com saldo, receitas/despesas/resultado do mês, gráfico receitas x despesas (6 meses), pizza por categoria e últimas transações; lançamentos com filtros (período, tipo, categoria, status), criar/editar/excluir; formulário validado com Zod; relatórios (12 meses + ranking de categorias); configurações (categorias, dados de exemplo, apagar tudo). Regras: receitas somam, despesas pagas subtraem, pendentes só contabilizam no total de pendentes. Tudo atualiza automaticamente.
+
+4. Como executar: o preview já está rodando; localmente, bun install e bun run dev (http://localhost:8080).
+
+5. Próximos passos recomendados: autenticação e banco de dados na nuvem (Lovable Cloud), contas bancárias e cartões de crédito, orçamento mensal e metas, lançamentos recorrentes, exportação CSV/PDF e, por fim, insights com IA.
+
+
+
+------------------------------------------------------------------------
+
+| Pasta/arquivo                     | Função                                                 |
+| --------------------------------- | ------------------------------------------------------ |
+| `models/finance.ts`               | Define os tipos e regras básicas dos dados financeiros |
+| `data/demoTransactions.ts`        | Guarda transações de demonstração                      |
+| `services/transactionStorage.ts`  | Salva e recupera dados do `localStorage`               |
+| `services/financeCalculations.ts` | Faz os cálculos financeiros                            |
+| `store/TransactionsProvider`      | Mantém os lançamentos sincronizados na aplicação       |
+| `components/layout`               | Estrutura visual do aplicativo                         |
+| `components/finance`              | Componentes específicos do financeiro                  |
+| `components/ui`                   | Componentes visuais reutilizáveis                      |
+| `routes`                          | Define as páginas do aplicativo                        |
+| `lib/format.ts`                   | Formatação de dinheiro e datas                         |
+| `styles.css`                      | Identidade visual                                      |
+
+------------------------------------------------------------
+Segunda Etapa:
+
+Próximo prompt para o Vibe Code
+
+Agora quero validar e aprimorar o núcleo financeiro do FinanSmart.
+
+Não altere a arquitetura geral do projeto e não crie novas funcionalidades ainda.
+
+Analise os arquivos:
+
+- src/models/finance.ts
+- src/services/transactionStorage.ts
+- src/services/financeCalculations.ts
+- src/store/TransactionsProvider
+- src/components/finance/TransactionForm
+- src/components/finance/TransactionDialog
+- src/components/finance/TransactionsTable
+
+OBJETIVO
+
+Garantir que o fluxo de lançamento financeiro esteja funcionando corretamente de ponta a ponta.
+
+FLUXO ESPERADO
+
+1. Usuário abre "Novo lançamento".
+2. Seleciona Receita ou Despesa.
+3. Preenche descrição.
+4. Informa valor.
+5. Seleciona data.
+6. Seleciona categoria.
+7. Seleciona forma de pagamento.
+8. Seleciona status.
+9. Salva o lançamento.
+10. O lançamento deve aparecer imediatamente na tabela.
+11. O Dashboard deve atualizar automaticamente.
+12. O saldo deve ser recalculado.
+13. Os gráficos devem refletir o novo lançamento.
+14. O lançamento deve permanecer salvo após atualizar a página.
+
+REGRAS
+
+Receita paga:
++ valor no saldo.
+
+Despesa paga:
+- valor no saldo.
+
+Receita pendente:
+não deve alterar o saldo atual.
+
+Despesa pendente:
+não deve alterar o saldo atual.
+
+Todos os lançamentos, pagos ou pendentes, devem continuar disponíveis para relatórios e consultas.
+
+VALIDAÇÕES
+
+Impedir:
+
+- descrição vazia;
+- valor igual a zero;
+- valor negativo;
+- categoria não selecionada;
+- data inválida;
+- tipo não selecionado.
+
+VALORES
+
+Garantir que valores monetários sejam tratados como números internamente e exibidos como moeda brasileira:
+
+R$ 1.250,00
+
+Evitar problemas de cálculo causados por strings formatadas como moeda.
+
+LOCALSTORAGE
+
+Verificar se:
+
+- salvar funciona;
+- editar funciona;
+- excluir funciona;
+- atualizar a página mantém os dados;
+- dados inválidos não corrompem o armazenamento.
+
+IMPORTANTE
+
+Não criar dados fictícios automaticamente.
+
+Os dados existentes em demoTransactions devem continuar claramente identificados como DEMONSTRAÇÃO.
+
+Antes de finalizar:
+
+1. Analise o código existente.
+2. Corrija problemas encontrados.
+3. Não reescreva arquivos desnecessariamente.
+4. Preserve a arquitetura atual.
+5. Garanta que o CRUD esteja funcionando.
+6. Faça uma verificação final de possíveis erros de TypeScript.
+7. Informe exatamente quais arquivos foram alterados e o motivo.
+
+
+____________________________________________________________________
+
+Núcleo validado ponta a ponta (criar → tabela → dashboard → recarregar mantém os dados). Arquivos alterados e motivos:
+
+- src/services/financeCalculations.ts — corrigido o saldo: antes toda receita somava, inclusive pendente. Agora somente lançamentos pagos afetam o saldo (receita paga soma, despesa paga subtrai; pendentes ficam de fora, mas seguem nos relatórios). `summarize` passou a expor `paidIncome`/`pendingIncome` além dos campos já existentes.
+- src/lib/format.ts — `parseCurrencyInput` reescrito para tratar corretamente "1.250,00", "1250,00", "1250.50" e "1250" (antes "1250.50" virava 125050) e rejeitar texto inválido; adicionado `isValidISODate` (rejeita 2026-02-31, mês 13 etc.).
+- src/components/finance/TransactionForm.tsx — removida a função duplicada `parseAmount` (usava a lógica antiga com bug) em favor de `parseCurrencyInput`; data agora validada como data real; valor validado com `refine` (NaN, zero e negativo bloqueados com mensagens claras); tipo com mensagem de erro própria. Valor sempre convertido para `number` antes de salvar.
+- src/services/transactionStorage.ts — leitura do localStorage agora valida cada registro (id, tipo, valor numérico > 0, data ISO, forma de pagamento e status válidos); registros corrompidos são descartados sem quebrar o app, e `createdAt` ausente é reposto.
+- src/routes/index.tsx — texto do card de saldo ajustado para refletir a regra correta.
+
+Sem mudanças de arquitetura, sem novas funcionalidades, dados demo continuam marcados com `[Exemplo]`/`isDemo` e só entram por ação manual; typecheck limpo.
